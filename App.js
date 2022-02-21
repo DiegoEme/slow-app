@@ -1,11 +1,9 @@
-import { View, StyleSheet } from 'react-native';
-import AppText from './app/components/AppText';
+import { StyleSheet } from 'react-native';
 
-import Card from './app/components/Card';
-import ListingDetailsScrenn from './app/screens/ListingDetailsScrenn';
-import MessagesScreen from './app/screens/MessagesScreen';
-import ViewImageScreen from './app/screens/ViewImageScreen';
+import Screen from './app/components/Screen';
+import Icon from './app/components/Icon';
 import { LogBox } from 'react-native';
+import ListItem from './app/components/ListItem';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -13,7 +11,9 @@ LogBox.ignoreLogs([
 
 export default function App() {
   return (
-      <MessagesScreen />
+      <Screen>
+          <ListItem title="my title" subtitle="subtitle"/>
+      </Screen>
       
   );
 }
