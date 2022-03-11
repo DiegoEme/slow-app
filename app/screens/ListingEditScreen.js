@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
+import CatergoryPickerItem from "../components/CatergoryPickerItem";
 
 import {
   AppForm,
@@ -19,16 +20,22 @@ const validationSchema = Yup.object().shape({
 
 const categories = [
   {
-    label: "Men's Clothing",
+    label: "Men's Clothes",
     value: 1,
+    backgroundColor: "red",
+    icon: "apps",
   },
   {
-    label: "Women's Clothing",
+    label: "Women's Clothes",
     value: 2,
+    backgroundColor: "green",
+    icon: "email",
   },
   {
     label: "Shoes",
     value: 3,
+    backgroundColor: "blue",
+    icon: "lock",
   },
 ];
 
@@ -55,6 +62,8 @@ function ListingEditScreen(props) {
         <AppFormPicker
           items={categories}
           name="category"
+          numberOfColumns={3}
+          PickerItemComponent={CatergoryPickerItem}
           placeholder="Category"
         />
         <AppFormField
