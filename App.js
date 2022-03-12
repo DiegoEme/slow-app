@@ -1,26 +1,47 @@
-import { useState } from "react";
-import { StyleSheet, TextInput, Text, Switch } from "react-native";
+import React, { useEffect, useState } from "react";
 import { LogBox } from "react-native";
+import { Button, Image } from "react-native";
 
-import AppTextInput from "./app/components/AppTextInput";
-import AppPicker from "./app/components/AppPicker";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
+
 import Screen from "./app/components/Screen";
-import LoginScreen from "./app/screens/LoginScreen";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
-import ListItem from "./app/components/ListItem";
+import ImageInput from "./app/components/ImageInput";
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
 
 export default function App() {
-  return <ListingEditScreen />;
-}
+  const [imageUrl, setImageUrl] = useState();
+  /* const requestPermission = async () => {
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+    if (!result.granted) {
+      alert("Tou need to enable permission to access the library");
+    }
+  };
+
+  useEffect(() => {
+    requestPermission();
+  }, []); */ //Empty array, then this function will execute only once
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync();
+      if (!result.cancelled) {
+        setImageUrl(result.uri);
+      }
+    } catch (error) {
+      console.log("Error reading an image", error);
+    }
+  };
+
+  return (
+    <Screen>
+      <ImageInput
+        onChangeImage={(uri) => setImageUrl(uri)}
+        imageUrl={imageUrl}
+      />
+    </Screen>
+  );
+}
