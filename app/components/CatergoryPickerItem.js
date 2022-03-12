@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 
 import Icon from "./Icon";
 import AppText from "./AppText";
@@ -7,7 +7,13 @@ import AppText from "./AppText";
 function CatergoryPickerItem({ item, onPress }) {
   return (
     <View style={styles.container}>
-      <Icon backgroundColor={item.backgroundColor} name={item.icon} size={50} />
+      <TouchableOpacity onPress={onPress}>
+        <Icon
+          backgroundColor={item.backgroundColor}
+          name={item.icon}
+          size={50}
+        />
+      </TouchableOpacity>
       <AppText style={styles.text}>{item.label}</AppText>
     </View>
   );
