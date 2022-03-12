@@ -12,7 +12,7 @@ import colors from "../config/colors";
 import * as ImagePicker from "expo-image-picker";
 
 function ImageInput({ imageUrl, onChangeImage }) {
-  useEffect(() => {
+  /* seEffect(() => {
     requestPermission();
   }, []);
 
@@ -21,7 +21,7 @@ function ImageInput({ imageUrl, onChangeImage }) {
     if (!result.granted) {
       alert("Tou need to enable permission to access the library");
     }
-  };
+  }; */
   const handlePress = () => {
     if (!imageUrl) selectImage();
     else

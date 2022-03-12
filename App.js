@@ -7,40 +7,29 @@ import * as Permissions from "expo-permissions";
 
 import Screen from "./app/components/Screen";
 import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
 
 export default function App() {
-  const [imageUrl, setImageUrl] = useState();
-  /* const requestPermission = async () => {
+  const [imageUris, setImageUris] = useState([]);
 
-    if (!result.granted) {
-      alert("Tou need to enable permission to access the library");
-    }
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
   };
 
-  useEffect(() => {
-    requestPermission();
-  }, []); */ //Empty array, then this function will execute only once
-
-  const selectImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync();
-      if (!result.cancelled) {
-        setImageUrl(result.uri);
-      }
-    } catch (error) {
-      console.log("Error reading an image", error);
-    }
+  const handleRemove = (uri) => {
+    setImageUris(imageUris.filter((imageUri) => imageUri != uri));
   };
 
   return (
     <Screen>
-      <ImageInput
-        onChangeImage={(uri) => setImageUrl(uri)}
-        imageUrl={imageUrl}
+      <ImageInputList
+        onAddImage={(uri) => handleAdd(uri)}
+        onRemoveImage={(uri) => handleRemove(uri)}
+        imageUris={imageUris}
       />
     </Screen>
   );
