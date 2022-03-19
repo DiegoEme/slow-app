@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { LogBox } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import { NavigationContainer } from "@react-navigation/native";
-import jwtDecode from "jwt-decode";
 
 import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
@@ -17,15 +16,13 @@ LogBox.ignoreLogs([
 export default function App() {
   const [user, setUser] = useState();
 
-  const restoreToken = async () => {
-    const token = await storage.getToken();
-    if (!token) return;
-
-    setUser(jwtDecode(token));
+  const restoreUser = async () => {
+    const user = await storage.getUser();
+    if (user) setUser(user);
   };
 
   useEffect(() => {
-    restoreToken();
+    restoreUser();
   }, []);
 
   return (
